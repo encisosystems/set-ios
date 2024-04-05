@@ -15,6 +15,7 @@ struct EstimationToolView: View {
     @State private var isLoading = false
     @State private var isSmart = false
     @State private var showCopyConfirmation = false
+    @State private var showShareSheet = false
 
     private var estimationApi = EstimationApi()
 
@@ -79,6 +80,18 @@ struct EstimationToolView: View {
                                     }
                                     .padding()
                                     .buttonStyle(.bordered)
+                                    Button(action: {
+                                        showShareSheet = true  // Show confirmation when copied
+                                    }) {
+                                        Image(systemName: "square.and.arrow.up")  // Only the copy symbol
+                                    }
+                                    .padding()
+                                    .buttonStyle(.bordered)
+                                    .sheet(isPresented: $showShareSheet, content: {
+                                        // Present the share sheet
+                                        ShareSheet(activityItems: [estimations])
+                                    })
+                                    
                                 }
                             }
                         }
