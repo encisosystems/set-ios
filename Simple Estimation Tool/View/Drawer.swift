@@ -16,9 +16,7 @@ struct Drawer: View{
     var body: some View{
         VStack{
             HStack{
-                
                 Spacer()
-                
                 
                 if menuData.showDrawer{
                     DrawerCloseButton(animation: animation)
@@ -29,7 +27,6 @@ struct Drawer: View{
                 Text("SET")
                     .font(.title)
                     .fontWeight(.heavy)
-                    
             })
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,9 +34,7 @@ struct Drawer: View{
             .padding(.top,5)
             
             VStack(spacing: 22){
-                
                 MenuButton(name: "Home", image: "house.fill", selectedMenu: $menuData.selectedMenu, animation: animation)
-                
                 MenuButton(name: "Acerca de", image: "info.circle.fill", selectedMenu: $menuData.selectedMenu, animation: animation)
             }
             .padding(.leading)
@@ -55,40 +50,32 @@ struct Drawer: View{
     }
 }
 
-
 struct DrawerCloseButton: View{
-    
     @EnvironmentObject var menuData: MenuViewModel
-    
     var animation: Namespace.ID
-    
     var body: some View{
         Button(action: {
             withAnimation(.easeInOut){
                 menuData.showDrawer.toggle()
             }
         }, label: {
-           
             VStack(spacing: 5){
-                
                 Capsule()
                     .fill(menuData.showDrawer ? Color.white : Color.primary)
                     .frame(width: 35, height: 3)
                     .rotationEffect(.init(degrees: menuData.showDrawer ? -50 : 0))
-                
                     .offset(x: menuData.showDrawer ? 2 : 0, y: menuData.showDrawer ? 9 : 0)
                 
                 VStack(spacing: 5){
+                    Capsule()
+                        .fill(menuData.showDrawer ? Color.white : Color.primary)
+                        .frame(width: 35, height: 3)
                     
                     Capsule()
-                        .fill(menuData.showDrawer ? Color.white : Color.primary)                        .frame(width: 35, height: 3)
-                    
-                    Capsule()
-                        .fill(menuData.showDrawer ? Color.white : Color.primary)                        .frame(width: 35, height: 3)
-                    
+                        .fill(menuData.showDrawer ? Color.white : Color.primary)
+                        .frame(width: 35, height: 3)
                         .offset(y: menuData.showDrawer ? -8 : 0)
                 }
-                
                 .rotationEffect(.init(degrees: menuData.showDrawer ? 50 : 0))
             }
         })

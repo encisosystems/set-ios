@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MenuButton: View{
-     
+    @EnvironmentObject var menuData: MenuViewModel
     var name: String
     var image: String
     @Binding var selectedMenu: String
@@ -12,6 +12,9 @@ struct MenuButton: View{
         Button(action: {
             withAnimation(.spring()){
                 selectedMenu = name
+            };
+            withAnimation(.easeInOut){
+                menuData.showDrawer.toggle()
             }
         }, label: {
             HStack(spacing: 15){
@@ -32,8 +35,7 @@ struct MenuButton: View{
                     if selectedMenu == name{
                         Color.white
                             .cornerRadius(10)
-                            .matchedGeometryEffect(id: "TAB", in:
-                                    animation)
+                            .matchedGeometryEffect(id: "TAB", in: animation)
                     }
                     else{
                         Color.clear

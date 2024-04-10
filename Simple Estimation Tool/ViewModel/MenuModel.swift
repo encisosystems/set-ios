@@ -8,8 +8,6 @@
 import SwiftUI
 
 class MenuViewModel: ObservableObject{
-    
     @Published var selectedMenu = "Home"
-    
     @Published var showDrawer = false
 }

@@ -22,7 +22,7 @@ struct EstimationToolView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 16) {
-                Text("Simple Estimation Tool")
+                Text("Enciso Estimation")
                     .font(.headline)
                 Spacer() // Pushes everything to center
                 
@@ -62,7 +62,9 @@ struct EstimationToolView: View {
                         }
                     }
                     
-                    
+/*
+ Hacer una pagina en react con la frase hola mundo
+ */
                     if showEstimations {
                         ScrollView {
                             VStack {
@@ -71,27 +73,29 @@ struct EstimationToolView: View {
                                     .multilineTextAlignment(.center) // Centers the text within the Text view
                                 // Show the copy button only if the task is smart
                                 if isSmart {
-                                    Button(action: {
-                                        UIPasteboard.general.string = estimations
-                                        showCopyConfirmation = true  // Show confirmation when copied
-                                    }) {
-                                        Image(systemName: "doc.on.doc")  // Only the copy symbol
-                                            .font(.title2)  // Optional: Adjust the size of the symbol
+                                    HStack {
+                                        Button(action: {
+                                            UIPasteboard.general.string = estimations
+                                            showCopyConfirmation = true
+                                        }) {
+                                            Image(systemName: "doc.on.doc")
+                                                .font(.title2)
+                                        }
+                                        .buttonStyle(.bordered)
+                                        .padding()
+                                        
+                                        Button(action: {
+                                            showShareSheet = true
+                                        }) {
+                                            Image(systemName: "square.and.arrow.up")
+                                                .font(.title2)
+                                        }
+                                        .buttonStyle(.bordered)
+                                        .padding()
+                                        .sheet(isPresented: $showShareSheet, content: {
+                                            ShareSheet(activityItems: [estimations])
+                                        })
                                     }
-                                    .padding()
-                                    .buttonStyle(.bordered)
-                                    Button(action: {
-                                        showShareSheet = true  // Show confirmation when copied
-                                    }) {
-                                        Image(systemName: "square.and.arrow.up")  // Only the copy symbol
-                                    }
-                                    .padding()
-                                    .buttonStyle(.bordered)
-                                    .sheet(isPresented: $showShareSheet, content: {
-                                        // Present the share sheet
-                                        ShareSheet(activityItems: [estimations])
-                                    })
-                                    
                                 }
                             }
                         }
