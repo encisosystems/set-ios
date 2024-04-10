@@ -11,7 +11,7 @@ import SwiftUI
 struct Simple_Estimation_ToolApp: App {
     var body: some Scene {
         WindowGroup {
-            EstimationToolView()
+            PrincipalView()
         }
     }
 }
